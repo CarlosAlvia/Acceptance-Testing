@@ -2,24 +2,21 @@ import json
 import os
 
 
-# Ruta del archivo JSON donde se guardarán las tareas
+
 FILE_PATH = 'tareas.json'
 tareas = {}
-# Función para cargar las tareas desde el archivo JSON
+
 def cargar_tareas():
     if os.path.exists(FILE_PATH):
         with open(FILE_PATH, 'r') as archivo:
             return json.load(archivo)
     return {}
 
-# Función para guardar las tareas en el archivo JSON
 def guardar_tareas(tareas):
     with open(FILE_PATH, 'w') as archivo:
         json.dump(tareas, archivo, indent=4)
 
-# Función para agregar una tarea
-def agregar_tarea(tareas):
-    tarea = input("Ingrese la tarea a agregar: ")
+def agregar_tarea(tareas,tarea):
     if tarea in tareas:
         print("La tarea ya existe en la lista.")
     else:
@@ -38,8 +35,7 @@ def listar_tareas(tareas):
             print(f"{tarea}: {estado}")
 
 
-def marcar_completada(tareas):
-    tarea = input("Ingrese la tarea que desea marcar como completada: ")
+def marcar_completada(tareas,tarea):
     if tarea in tareas:
         tareas[tarea] = True
         print("Tarea marcada como completada.")
@@ -65,11 +61,13 @@ def menu():
         opcion = input("Seleccione una opción: ")
 
         if opcion == '1':
-            agregar_tarea(tareas)
+            tarea = input("Ingrese la tarea a agregar: ")
+            agregar_tarea(tareas,tarea)
         elif opcion == '2':
             listar_tareas(tareas)
         elif opcion == '3':
-            marcar_completada(tareas)
+            tarea = input("Ingrese la tarea que desea marcar como completada: ")
+            marcar_completada(tareas,tarea)
         elif opcion == '4':
             limpiar_tareas(tareas)
         elif opcion == '5':
