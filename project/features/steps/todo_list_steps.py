@@ -58,18 +58,18 @@ def step_impl(context):
     isEmpty = len(todo_list.tareas) == 0
     assert isEmpty, f'The to-do list is not empty' 
 
-@given("the to-do list has no tasks")
+@given("the to-do list has no tasks:")
 def step_impl(context):
     todo_list.limpiar_tareas(todo_list.tareas)
 
 @when("the user adds a task 'test code'")
 def step_impl(context):
     todo_list.agregar_tarea(todo_list.tareas,"test code")
-    todo_list.guardar_tareas()
+    todo_list.guardar_tareas(todo_list.tareas)
 
 @then("the to-do list gets serialized")
 def step_impl(context):
-    tasks = cargar_tareas()
+    tasks = todo_list.cargar_tareas()
     isNotEmpy = len(tasks)>0
     assert isNotEmpy, f'The to-do list is empty' 
 
