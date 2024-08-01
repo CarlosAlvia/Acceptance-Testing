@@ -65,7 +65,6 @@ def step_impl(context):
 @when("the user adds a task 'test code'")
 def step_impl(context):
     todo_list.agregar_tarea(todo_list.tareas,"test code")
-    todo_list.guardar_tareas(todo_list.tareas)
 
 @then("the to-do list gets serialized")
 def step_impl(context):
